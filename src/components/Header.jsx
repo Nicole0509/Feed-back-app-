@@ -4,11 +4,7 @@ function Header({text = 'FeedBack UI'}) {
   return (
     <header>
         <div className="container">
-            <h2>FeedBack UI</h2>
-            <h3>{text}</h3> 
-            {/* can also do <h3>{text}</h3>  
-            As long as we know the different names of props being passedin the function definition and the function call 
-            e.g.: function Header({text}) {... */}
+            <h2>{text}</h2> 
       
         </div>
     </header>
