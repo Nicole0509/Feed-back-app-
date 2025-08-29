@@ -3,23 +3,45 @@ import Button from "./shared/Button"
 import { useState } from "react"
 
 function FeedbackForm() {
-    const [text, setText] = useState('')
+  const [text, setText] = useState('')
+  const [btnDisabled, setBtnDisabled] = useState(true)
+  const [message, setMessage] = useState('')
 
-    const handleTextChange = (e) => {
-        setText(e.target.value)
+  const handleTextChange = (e) => {
+    const inputValue = e.target.value   // ✅ use the latest input directly
 
-        console.log(text)
+    if (inputValue.trim() === '') {
+      setBtnDisabled(true)
+      setMessage(null)
+    } else if (inputValue.trim().length <= 10) {
+      setMessage('Text must be at least 10 characters')
+      setBtnDisabled(true)
+    } else {
+      setBtnDisabled(false)
+      setMessage(null)
     }
+
+    setText(inputValue)  // ✅ update state after validation
+  }
 
   return (
     <Card>
-        <form >
-            <h2>How would you rate your service with us?</h2>
-            <div className="input-group">
-                <input onChange={handleTextChange} type="text" placeholder="Write a review" value={text}/>
-                <Button type="submit" >Send</Button>
-            </div>
-        </form>
+      <form>
+        <h2>How would you rate your service with us?</h2>
+        <div className="input-group">
+          <input
+            onChange={handleTextChange}
+            type="text"
+            name="review"
+            placeholder="Write a review"
+            value={text}
+          />
+          <Button type="submit" isDisabled={btnDisabled}>
+            Send
+          </Button>
+        </div>
+        {message && <div className="message">{message}</div>}
+      </form>
     </Card>
   )
 }
