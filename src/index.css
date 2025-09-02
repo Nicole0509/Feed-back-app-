@@ -181,16 +181,19 @@ input:focus {
 }
 
 .about-link {
-  position: absolute;
+  position: fixed;   /* ✅ stays in place while scrolling */
   bottom: 20px;
   right: 20px;
   color: #fff;
   cursor: pointer;
+  z-index: 1000;     /* ✅ makes sure it stays on top */
 }
 
 .about-link a {
   color: #fff;
+  text-decoration: none; /* optional: remove underline */
 }
+
 
 .about-link a:hover {
   color: #ff6a95;
